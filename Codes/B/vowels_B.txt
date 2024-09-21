@@ -1,0 +1,23 @@
+def count_vowels(text):
+    vowels = "aeiouAEIOU"
+    vowel_count = {}
+    i = 0
+
+    while i < len(text):
+        char = text[i]
+        if char in vowels:
+            if char in vowel_count:
+                vowel_count[char] += 1
+            else:
+                vowel_count[char] = 1
+        i += 1  # Incrementa il contatore come in un ciclo for in stile Java
+
+    return vowel_count
+
+def main():
+    sample_text = "Hello World, this is a sample string with some vowels."
+    counts = count_vowels(sample_text)
+    print("Vowel counts:", counts)
+
+if __name__ == "__main__":
+    main()

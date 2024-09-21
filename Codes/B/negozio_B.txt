@@ -1,0 +1,36 @@
+class Negozio:
+    def __init__(self):
+        self.inventario = []
+
+    def trova_prodotto_caro(self):
+        if not self.inventario:
+            return None
+        
+        prodotto_caro = self.inventario[0]
+        for prodotto in self.inventario:
+            if prodotto['prezzo'] > prodotto_caro['prezzo']:
+                prodotto_caro = prodotto
+        return prodotto_caro
+
+    def calcola_valore_inventario(self):
+        valore_totale = 0
+        for prodotto in self.inventario:
+            valore_totale += prodotto['prezzo'] * prodotto['quantita']
+        return valore_totale
+
+    def aggiungi_prodotto(self, nome, prezzo, quantita):
+        prodotto = {
+            'nome': nome,
+            'prezzo': prezzo,
+            'quantita': quantita
+        }
+        self.inventario.append(prodotto)
+
+# Esempio di utilizzo
+negozio = Negozio()
+negozio.aggiungi_prodotto("Laptop", 1200, 5)
+negozio.aggiungi_prodotto("Smartphone", 800, 10)
+negozio.aggiungi_prodotto("Tablet", 600, 7)
+
+print("Valore totale dell'inventario:", negozio.calcola_valore_inventario())
+print("Prodotto più costoso:", negozio.trova_prodotto_caro())

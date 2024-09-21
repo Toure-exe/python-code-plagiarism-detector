@@ -1,0 +1,39 @@
+class AnalisiLista:
+    def __init__(self, lista_numeri):
+        self.lista_numeri = lista_numeri
+        self.somma = 0
+        self.media = 0
+        self.massimo = None
+        self.minimo = None
+
+    def calcola_somma(self):
+        self.somma = sum(self.lista_numeri)
+
+    def calcola_media(self):
+        self.media = self.somma / len(self.lista_numeri) if self.lista_numeri else 0
+
+    def calcola_massimo(self):
+        self.massimo = max(self.lista_numeri)
+
+    def calcola_minimo(self):
+        self.minimo = min(self.lista_numeri)
+
+    def analisi_lista(self):
+        self.calcola_somma()
+        self.calcola_media()
+        self.calcola_massimo()
+        self.calcola_minimo()
+        
+        risultato = {
+            'somma': self.somma,
+            'media': self.media,
+            'massimo': self.massimo,
+            'minimo': self.minimo
+        }
+        
+        return risultato
+
+# Esempio di utilizzo
+numeri = [3, 5, 7, 2, 8, -1, 4]
+analisi = AnalisiLista(numeri)
+print(analisi.analisi_lista())

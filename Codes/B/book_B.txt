@@ -1,0 +1,114 @@
+class Novel:
+    def __init__(self, title, writer, publication_year, category):
+        self.title = title
+        self.writer = writer
+        self.publication_year = publication_year
+        self.category = category
+        self.is_loaned_out = False
+
+    def loan_out(self):
+        if not self.is_loaned_out:
+            self.is_loaned_out = True
+            return f"The novel '{self.title}' has been loaned out."
+        else:
+            return f"The novel '{self.title}' is already loaned out."
+
+    def return_novel(self):
+        if self.is_loaned_out:
+            self.is_loaned_out = False
+            return f"The novel '{self.title}' has been returned."
+        else:
+            return f"The novel '{self.title}' was not loaned out."
+
+    def novel_info(self):
+        return f"'{self.title}' by {self.writer}, published in {self.publication_year} - Category: {self.category}"
+
+class User:
+    def __init__(self, username, user_id):
+        self.username = username
+        self.user_id = user_id
+        self.loaned_novels = []
+
+    def loan_novel(self, novel):
+        if len(self.loaned_novels) < 5:
+            if not novel.is_loaned_out:
+                novel.loan_out()
+                self.loaned_novels.append(novel)
+                return f"{self.username} has loaned '{novel.title}'."
+            else:
+                return f"'{novel.title}' is already loaned out."
+        else:
+            return f"{self.username} cannot loan more than 5 novels at a time."
+
+    def return_novel(self, novel):
+        if novel in self.loaned_novels:
+            novel.return_novel()
+            self.loaned_novels.remove(novel)
+            return f"{self.username} has returned '{novel.title}'."
+        else:
+            return f"{self.username} does not have '{novel.title}' on loan."
+
+    def user_info(self):
+        novels_list = ', '.join([novel.title for novel in self.loaned_novels]) if self.loaned_novels else "No novels on loan"
+        return f"Username: {self.username}, ID: {self.user_id}, Loaned Novels: {novels_list}"
+
+class BookStore:
+    def __init__(self, store_name):
+        self.store_name = store_name
+        self.novels = []
+        self.users = []
+
+    def add_novel(self, novel):
+        self.novels.append(novel)
+        return f"The novel '{novel.title}' has been added to the bookstore."
+
+    def add_user(self, user):
+        self.users.append(user)
+        return f"User '{user.username}' has been added to the bookstore."
+
+    def search_novel(self, title):
+        for novel in self.novels:
+            if novel.title == title:
+                return novel
+        return None
+
+    def store_info(self):
+        novels_list = ', '.join([novel.title for novel in self.novels]) if self.novels else "No novels available"
+        users_list = ', '.join([user.username for user in self.users]) if self.users else "No users registered"
+        return f"Bookstore Name: {self.store_name}, Novels: {novels_list}, Users: {users_list}"
+
+def run():
+    # Create a bookstore
+    bookstore = BookStore("Downtown Bookstore")
+
+    # Add novels to the bookstore
+    novel1 = Novel("Brave New World", "Aldous Huxley", 1932, "Science Fiction")
+    novel2 = Novel("The Catcher in the Rye", "J.D. Salinger", 1951, "Literary Fiction")
+    novel3 = Novel("Moby-Dick", "Herman Melville", 1851, "Adventure")
+
+    bookstore.add_novel(novel1)
+    bookstore.add_novel(novel2)
+    bookstore.add_novel(novel3)
+
+    # Add a user to the bookstore
+    user = User("Jane Smith", "1001")
+    bookstore.add_user(user)
+
+    # User loans a novel
+    print(user.loan_novel(novel1))
+    print(user.loan_novel(novel2))
+
+    # User tries to loan a novel that is already loaned out
+    print(user.loan_novel(novel1))
+
+    # User returns a novel
+    print(user.return_novel(novel1))
+
+    # User information
+    print(user.user_info())
+
+    # Bookstore information
+    print(bookstore.store_info())
+
+if __name__ == "__main__":
+    run()

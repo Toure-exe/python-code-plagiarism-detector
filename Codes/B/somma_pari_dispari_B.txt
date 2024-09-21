@@ -1,0 +1,37 @@
+class NumberProcessor:
+    def __init__(self, numbers):
+        """Inizializza il processore con un elenco di numeri."""
+        self.numbers = numbers
+        self.sum_of_squares = 0
+        self.sum_of_cubes = 0
+    
+    def is_even(self, number):
+        """Verifica se un numero è pari."""
+        return number % 2 == 0
+    
+    def calculate_square(self, number):
+        """Calcola il quadrato di un numero."""
+        return number ** 2
+    
+    def calculate_cube(self, number):
+        """Calcola il cubo di un numero."""
+        return number ** 3
+    
+    def process(self):
+        """Processa i numeri per calcolare le somme."""
+        for num in self.numbers:
+            if self.is_even(num):
+                self.sum_of_squares += self.calculate_square(num)
+            else:
+                self.sum_of_cubes += self.calculate_cube(num)
+    
+    def get_difference(self):
+        """Ritorna la differenza tra la somma dei quadrati e la somma dei cubi."""
+        return self.sum_of_squares - self.sum_of_cubes
+
+if __name__ == "__main__":
+    numbers = list(map(int, input("Inserisci una lista di numeri interi separati da spazi: ").split()))
+    processor = NumberProcessor(numbers)
+    processor.process()
+    result = processor.get_difference()
+    print(f"La differenza tra la somma dei quadrati dei numeri pari e la somma dei cubi dei numeri dispari è: {result}")

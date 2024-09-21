@@ -1,0 +1,42 @@
+def calcola_somma(lista_numeri):
+    somma = 0
+    for numero in lista_numeri:
+        somma += numero
+    return somma
+
+def calcola_media(lista_numeri, somma):
+    media = somma / len(lista_numeri) if lista_numeri else 0
+    return media
+
+def calcola_massimo(lista_numeri):
+    massimo = lista_numeri[0]
+    for numero in lista_numeri[1:]:
+        if numero > massimo:
+            massimo = numero
+    return massimo
+
+def calcola_minimo(lista_numeri):
+    minimo = lista_numeri[0]
+    for numero in lista_numeri[1:]:
+        if numero < minimo:
+            minimo = numero
+    return minimo
+
+def analisi_lista(lista_numeri):
+    somma = calcola_somma(lista_numeri)
+    media = calcola_media(lista_numeri, somma)
+    massimo = calcola_massimo(lista_numeri)
+    minimo = calcola_minimo(lista_numeri)
+    
+    risultato = {
+        'somma': somma,
+        'media': media,
+        'massimo': massimo,
+        'minimo': minimo
+    }
+    
+    return risultato
+
+# Esempio di utilizzo
+numeri = [3, 5, 7, 2, 8, -1, 4]
+print(analisi_lista(numeri))

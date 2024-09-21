@@ -1,0 +1,35 @@
+def dfs_iterative(graph, start):
+    """
+    Implementazione iterativa dell'algoritmo DFS utilizzando uno stack.
+    
+    :param graph: Un dizionario che rappresenta il grafo, dove le chiavi sono nodi e i valori sono liste di nodi adiacenti.
+    :param start: Il nodo da cui iniziare la ricerca.
+    :return: None
+    """
+    visited = set()
+    stack = [start]
+    
+    while stack:
+        node = stack.pop()  # Estrae l'elemento in cima allo stack
+        
+        if node not in visited:
+            # Visita il nodo corrente
+            visited.add(node)
+            print(node, end=' ')
+            
+            # Aggiungi i vicini del nodo allo stack (in ordine inverso per mantenere l'ordine corretto)
+            for neighbor in reversed(graph[node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+if __name__ == "__main__":
+    graph = {
+        'A': ['B', 'C'],
+        'B': ['D', 'E'],
+        'C': ['F'],
+        'D': [],
+        'E': ['F'],
+        'F': []
+    }
+    print("DFS iterativo a partire dal nodo A:")
+    dfs_iterative(graph, 'A')

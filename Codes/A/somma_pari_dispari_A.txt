@@ -1,0 +1,29 @@
+def is_even(number):
+    """Verifica se un numero è pari."""
+    return number % 2 == 0
+
+def calculate_square(number):
+    """Calcola il quadrato di un numero."""
+    return number ** 2
+
+def calculate_cube(number):
+    """Calcola il cubo di un numero."""
+    return number ** 3
+
+def process_numbers(numbers):
+    """Processa l'elenco dei numeri e calcola la differenza tra la somma dei quadrati dei pari e la somma dei cubi dei dispari."""
+    sum_of_squares = 0
+    sum_of_cubes = 0
+
+    for num in numbers:
+        if is_even(num):
+            sum_of_squares += calculate_square(num)
+        else:
+            sum_of_cubes += calculate_cube(num)
+    
+    return sum_of_squares - sum_of_cubes
+
+if __name__ == "__main__":
+    numbers = list(map(int, input("Inserisci una lista di numeri interi separati da spazi: ").split()))
+    result = process_numbers(numbers)
+    print(f"La differenza tra la somma dei quadrati dei numeri pari e la somma dei cubi dei numeri dispari è: {result}")

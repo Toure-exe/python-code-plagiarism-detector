@@ -1,0 +1,6 @@
+def somma_numeri(n):
+    return sum(range(1, n + 1))
+
+n = int(input("Inserisci un numero intero positivo: "))
+risultato = somma_numeri(n)
+print(f"La somma dei numeri da 1 a {n} è: {risultato}")

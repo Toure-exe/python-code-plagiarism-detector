@@ -1,0 +1,25 @@
+def calcola_fattoriale(n):
+    if n == 0 or n == 1:
+        return 1
+    return n * calcola_fattoriale(n - 1)
+
+def e_primo(num):
+    if num <= 1:
+        return 0
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return 0
+    return 1
+
+def main():
+    numero = int(input("Inserisci un numero intero positivo: "))
+
+    if e_primo(numero):
+        print(f"{numero} è un numero primo.")
+    else:
+        print(f"{numero} non è un numero primo.")
+
+    print(f"Il fattoriale di {numero} è: {calcola_fattoriale(numero)}")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,42 @@
+class Veicolo:
+    def __init__(self, marca, modello, anno):
+        self.marca = marca
+        self.modello = modello
+        self.anno = anno
+
+    def dettagli_veicolo(self):
+        return f"{self.anno} {self.marca} {self.modello}"
+
+class Auto(Veicolo):
+    def __init__(self, marca, modello, anno, tipo_alimentazione):
+        super().__init__(marca, modello, anno)
+        self.tipo_alimentazione = tipo_alimentazione
+
+    def dettagli_veicolo(self):
+        return f"{super().dettagli_veicolo()} - Alimentazione: {self.tipo_alimentazione}"
+
+class Moto(Veicolo):
+    def __init__(self, marca, modello, anno, cilindrata):
+        super().__init__(marca, modello, anno)
+        self.cilindrata = cilindrata
+
+    def dettagli_veicolo(self):
+        return f"{super().dettagli_veicolo()} - Cilindrata: {self.cilindrata}cc"
+
+def veicoli_demo():
+    auto = Auto("Fiat", "500", 2020, "Benzina")
+    moto = Moto("Ducati", "Panigale", 2021, 1100)
+
+    print(auto.dettagli_veicolo())
+    print(moto.dettagli_veicolo())
+
+def calcola_eta(anno_corrente, anno_veicolo):
+    return anno_corrente - anno_veicolo
+
+if __name__ == "__main__":
+    veicoli_demo()
+    anno_corrente = 2024
+    eta_auto = calcola_eta(anno_corrente, 2020)
+    eta_moto = calcola_eta(anno_corrente, 2021)
+    print(f"L'età dell'auto è: {eta_auto} anni")
+    print(f"L'età della moto è: {eta_moto} anni")

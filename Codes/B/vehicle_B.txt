@@ -1,0 +1,42 @@
+class Mezzo:
+    def __init__(self, brand, model, year):
+        self.brand = brand
+        self.model = model
+        self.year = year
+
+    def vehicle_details(self):
+        return f"{self.year} {self.brand} {self.model}"
+
+class Car(Mezzo):
+    def __init__(self, brand, model, year, fuel_type):
+        super().__init__(brand, model, year)
+        self.fuel_type = fuel_type
+
+    def vehicle_details(self):
+        return f"{super().vehicle_details()} - Fuel: {self.fuel_type}"
+
+class Bike(Mezzo):
+    def __init__(self, brand, model, year, engine_size):
+        super().__init__(brand, model, year)
+        self.engine_size = engine_size
+
+    def vehicle_details(self):
+        return f"{super().vehicle_details()} - Engine: {self.engine_size}cc"
+
+def demo_vehicles():
+    car = Car("Toyota", "Corolla", 2019, "Hybrid")
+    bike = Bike("Yamaha", "MT-07", 2022, 689)
+
+    print(car.vehicle_details())
+    print(bike.vehicle_details())
+
+def calculate_age(current_year, vehicle_year):
+    return current_year - vehicle_year
+
+if __name__ == "__main__":
+    demo_vehicles()
+    current_year = 2024
+    car_age = calculate_age(current_year, 2019)
+    bike_age = calculate_age(current_year, 2022)
+    print(f"The car's age is: {car_age} years")
+    print(f"The bike's age is: {bike_age} years")
